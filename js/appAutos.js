@@ -1,6 +1,6 @@
 //Se creo la rama develop
 
-
+//PROYECTO FINALIZADO
 // Constructor para seguro, recolecta la info
 class Seguro{
      constructor (marca, anio, tipo) {
