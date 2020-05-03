@@ -16,6 +16,7 @@ header {
     font-weight: bold;
     color: white;
 }
+
 header h1 {
     font-size: 22px;
     margin:0;
@@ -27,6 +28,8 @@ header h1 {
     margin-bottom: 20px;
     text-align: center;
     color: #F4511E;
+    font-size: small;
+    font: bold;
 }
 .correcto {
     background-color: rgb(211, 249, 187);
@@ -60,6 +63,7 @@ header h1 {
     margin-bottom: 40px;
 }
 #resultado div {
+    background-color: rgb(177, 231, 238);
     border: 1px solid #26C6DA;
     text-align: center;
     padding: 0  0 20px 0;
