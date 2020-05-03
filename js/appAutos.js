@@ -14,16 +14,18 @@ function Interfaz(){
      
 
 }
+
 //EventListener
 
 const formulario = document.getElementById('cotizar-seguro');
+
 formulario.addEventListener('submit', function(e){
      e.preventDefault();
-
+     //Leer marca (Spinner)
      const marca = document.getElementById('marca');
      const marcaSeleccionada = marca.options[marca.selectedIndex].value;
-
-     //Leer anio
+     
+     //Leer anio (Spinner)
      const anio = document.getElementById('anio');
      const anioSeleccionado = anio.options[anio.selectedIndex].value;
 
@@ -37,7 +39,7 @@ formulario.addEventListener('submit', function(e){
      //Revisar que los campos no esten vacios
      if(marcaSeleccionada === '' || anioSeleccionado === '' || tipo === ''){
           //Interfaz imprimiendo un error
-          console.log('Falton datos')
+          console.log('Faltan datos')
      }else{
           //Instanciar seguro
 
