@@ -52,7 +52,7 @@ Seguro.prototype.cotizarSeguro = function(){
 function Interfaz(){}
 
      //Mensaje que se imprime en el HTML
-     Interfaz.prototype.mostrarError = function(mensaje, tipo){
+     Interfaz.prototype.mostrarMensaje = function(mensaje, tipo){
          const div = document.createElement('div');
          
          if(tipo === 'error'){
@@ -70,26 +70,41 @@ function Interfaz(){}
          },3000);
         
      }
+     Interfaz.prototype.mostrarCotizando = function(mensaje){
+          const div = document.createElement('div');
+          
+          
+                div.classList.add('mensaje','loading','correcto');
+                
+          
+          div.innerHTML = `${mensaje}`;
+          formulario.insertBefore(div, document.querySelector('.form-group'));
+          setTimeout(function(){
+                document.querySelector('.mensaje').remove();
+          },3000);
+         
+      }
+
 
      //Imprime el resultado de la cotizacion
      Interfaz.prototype.mostrarInfo = function(seguro, total){
           const resultado = document.getElementById('resultado');
-
+         
           let marca;
           switch(seguro.marca){
                     case '1': marca = 'Americano';
                     break;
                     case '2': marca = 'Asiatico';
                     break;
-                    case '3':  marcar ='Europeo';
+                    case '3':  marca ='Europeo';
                     break;
           }
           const div = document.createElement('div');
 
           div.innerHTML = `
-               <p>Tu resumen:</p>
+               <p class="header">Tu resumen:</p>
 
-               <p>Marca: ${marca}</p>
+               <p >Marca: ${marca}</p>
 
                <p>Año: ${seguro.anio}</p>
 
@@ -98,14 +113,21 @@ function Interfaz(){}
                <p>Total: ${total}</p>
 
           `;
-          resultado.appendChild(div);
-          console.log(marca)
+          const spinner = document.querySelector('#cargando img');
+          spinner.style.display = 'block';
+          
+          setTimeout(function(){
+              
+               spinner.style.display = 'none';
+               
+               resultado.appendChild(div);
+               
+          },3000 );
+         
+          
     }
-
     
-
-
-
+    
 //EventListener
 
 const formulario = document.getElementById('cotizar-seguro');
@@ -131,10 +153,16 @@ formulario.addEventListener('submit', function(e){
      //Revisar que los campos no esten vacios
      if(marcaSeleccionada === '' || anioSeleccionado === '' || tipo === ''){
           //Interfaz imprimiendo un error
-          interfaz.mostrarError('Falta datos, revisa el formulario y prueba de nuevo', 'error');
+          interfaz.mostrarMensaje('Falta datos, revisa el formulario y prueba de nuevo', 'error');
           
      }else{
-          interfaz.mostrarError('Todo correcto', 'correcto');
+
+
+          //Limpiar rsultados anteriores
+          const resultados = document.querySelector('#resultado div');
+               if(resultados != null){
+                    resultados.remove();
+               }
           //Instanciar seguro
                const seguro = new Seguro(marcaSeleccionada,anioSeleccionado,tipo)
           //Cotizar seguro
@@ -143,6 +171,8 @@ formulario.addEventListener('submit', function(e){
           //mostrar resultado
 
           interfaz.mostrarInfo(seguro, cantidad);
+          interfaz.mostrarCotizando('Cotizando','loading');
+         
           
      }
      
