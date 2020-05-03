@@ -22,7 +22,7 @@ header h1 {
     margin:0;
 }
 .error {
-    background-color: #FBE9E7;
+    background-color: rgb(243, 216, 213);
     border: 1px solid #F4511E;
     padding: 10px;
     margin-bottom: 20px;
@@ -31,9 +31,10 @@ header h1 {
     font-size: small;
     font: bold;
 }
+
 .correcto {
     background-color: rgb(211, 249, 187);
-    border: 1px solid rgb(50, 167, 0);
+    border: 1px solid rgb(64, 200, 5);
     padding: 10px;
     margin-bottom: 20px;
     text-align: center;
