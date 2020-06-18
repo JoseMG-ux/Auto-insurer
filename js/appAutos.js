@@ -1,7 +1,6 @@
-//Se creo la rama develop
 
 //PROYECTO FINALIZADO
-// Constructor para seguro, recolecta la info
+// Builder for insurance, collect the info
 class Seguro{
      constructor (marca, anio, tipo) {
           this.marca = marca;
@@ -30,12 +29,12 @@ cotizarSeguro(){
         break;
    }
    const diferencia = new Date().getFullYear() - this.anio;
-   // Cada a;o de diferencia hay que reducir 3% el valor del seguro
+   // Each year of difference the value of the insurance must be reduced by 3%
     cantidad -= ((diferencia*3)) * cantidad / 100;
 
     /*
-     Si el seguro es basico se multiplica por 38% mas
-     Si el seguro es completo 56% mas.
+     If the insurance is basic it is multiplied by 38% more
+     If the insurance is complete 56% more.
     */
 
      if(this.tipo === 'basico'){
@@ -54,7 +53,7 @@ cotizarSeguro(){
 
 class Interfaz{
 
-     //Mensaje que se imprime en el HTML
+     //Message that prints in HTML
      mostrarMensaje (mensaje, tipo){
          const div = document.createElement('div');
          
@@ -89,10 +88,9 @@ class Interfaz{
       }
 
 
-     //Imprime el resultado de la cotizacion
+     //Print the result of the quote
      mostrarInfo (seguro, total){
           const resultado = document.getElementById('resultado');
-         
           let marca;
           switch(seguro.marca){
                     case '1': marca = 'Americano';
@@ -120,63 +118,56 @@ class Interfaz{
           spinner.style.display = 'block';
           
           setTimeout(function(){
-              
                spinner.style.display = 'none';
                
                resultado.appendChild(div);
                
-          },3000 );
-         
-          
-    }
+          },3000 );       
 }
-    
+}
 //EventListener
 
 const formulario = document.getElementById('cotizar-seguro');
 
 formulario.addEventListener('submit', function(e){
      e.preventDefault();
-     //Leer marca (Spinner)
+     //Read mark (Spinner)
      const marca = document.getElementById('marca');
      const marcaSeleccionada = marca.options[marca.selectedIndex].value;
      
      
-     //Leer anio (Spinner)
+     //Read year (Spinner)
      const anio = document.getElementById('anio');
      const anioSeleccionado = anio.options[anio.selectedIndex].value;
 
-     //Lee el valor del RadioButton
-
+     //Read the value of RadioButton
      const tipo = document.querySelector('input[name="tipo"]:checked').value;
 
-     //Crear instancia de Interfaz
+     //Create interface instance
      const interfaz = new Interfaz();
      
-     //Revisar que los campos no esten vacios
+     //Check that the fields are not empty
      if(marcaSeleccionada === '' || anioSeleccionado === '' || tipo === ''){
-          //Interfaz imprimiendo un error
+          //Interface printing error
           interfaz.mostrarMensaje('Falta datos, revisa el formulario y prueba de nuevo', 'error');
           
      }else{
 
 
-          //Limpiar rsultados anteriores
+          //clear previous results
           const resultados = document.querySelector('#resultado div');
                if(resultados != null){
                     resultados.remove();
                }
-          //Instanciar seguro
+          //Instant Secure
                const seguro = new Seguro(marcaSeleccionada,anioSeleccionado,tipo)
-          //Cotizar seguro
+          //Quote insurance
           const cantidad = seguro.cotizarSeguro(seguro);     
           
-          //mostrar resultado
+          //Show result
 
           interfaz.mostrarInfo(seguro, cantidad);
-          interfaz.mostrarCotizando('Cotizando','loading');
-         
-          
+          interfaz.mostrarCotizando('Cotizando','loading');       
      }
      
      
@@ -184,7 +175,7 @@ formulario.addEventListener('submit', function(e){
 
 
 
-//Años
+//Years
 const max = new Date().getFullYear(),
      min = max - 20;
 
